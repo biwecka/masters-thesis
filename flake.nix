@@ -20,35 +20,12 @@
                 # Custom LaTeX distribution
                 ctex = pkgs.texlive.combine {
                     inherit (pkgs.texlive) scheme-full;
-
-                    # inherit (pkgs.texlive)
-                    #     # Base distribution
-                    #     scheme-basic
-
-                    #     pdfrender       # this is only needed in the docker
-                    #                     # container for some reason (why?)
-
-                    #     # Additional packages
-                    #     pgf             # contains 'tikz'
-                    #     booktabs
-                    #     etoolbox
-                    #     changepage
-                    #     babel
-                    #     babel-german    # babel -> ngerman
-                    #     hyphen-german   # german hyphenation
-                    #     hyphenat
-                    #     helvetic
-                    #     bera            # beramono
-                    #     ltablex         # ltablex
-
-                    #     multirow
-                    # ;
                 };
 
                 ################################################################
 
                 # Needed at compile time
-                nativeBuildInputs = with pkgs; [];
+                nativeBuildInputs = []; # with pkgs; [];
 
                 # Needed at runtime
                 buildInputs = [ ctex ];
@@ -64,16 +41,16 @@
 
                 ################################################################
             in
-            rec {
+            {
                 # Development Environment ######################################
                 devShells.default = pkgs.mkShell {
                     inherit buildInputs nativeBuildInputs;
 
                     packages = devTools;
 
-                    shellHook = ''
-                        pre-commit install
-                    '';
+                    # shellHook = ''
+                    #     pre-commit install
+                    # '';
                 };
 
                 ################################################################
