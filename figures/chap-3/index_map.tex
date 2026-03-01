@@ -1,0 +1,81 @@
+\begin{tikzpicture}[
+    arrow/.style={-stealth, thick}, % Arrow style
+    node distance=0.1cm and 0.6cm, auto,% Spacing between nodes
+    textnode/.style={minimum width=2.3cm, text width=2.3cm, align=right}
+]
+    % Times column
+    \node (t0) [textnode] at (0, 0)     {Monday 1st};
+    \node (t1) [textnode, below= of t0] {Monday 2nd};
+    \node (t2) [textnode, below= of t1] {Monday 3rd};
+    \node (t3) [textnode, below= of t2] {\dots};
+    \node (t5) [textnode, below= of t3] {Monday 6th};
+    \node (t6) [textnode, below= of t5] {Tuesday 1st};
+
+    % Events column
+    \node (e0) [textnode, right of=t0, xshift=4.5cm]    {2a Math};
+    \node (e1) [textnode, right of=t1, xshift=4.5cm]    {2a English};
+    \node (e2) [textnode, right of=t2, xshift=4.5cm]    {2a Music};
+    \node (e3) [textnode, right of=t3, xshift=4.5cm]    {\dots};
+    \node (e5) [textnode, right of=t5, xshift=4.5cm]    {4b Math};
+    \node (e6) [textnode, right of=t6, xshift=4.5cm]    {4b Biology};
+
+    % Resources column
+    \node (r0) [textnode, right of=t0, xshift=9cm]    {Mr Jones};
+    \node (r1) [textnode, right of=t1, xshift=9cm]    {Ms Evans};
+    \node (r2) [textnode, right of=t2, xshift=9cm]    {Room 101};
+    \node (r3) [textnode, right of=t3, xshift=9cm]    {\dots};
+    \node (r5) [textnode, right of=t5, xshift=9cm]    {Room 210};
+    \node (r6) [textnode, right of=t6, xshift=9cm]    {Room 211};
+
+    % Indices for times
+    \node (ti0) [right= of t0] {$t_0$};
+    \node (ti1) [right= of t1] {$t_1$};
+    \node (ti2) [right= of t2] {$t_2$};
+    \node (ti5) [right= of t5] {$t_5$};
+    \node (ti6) [right= of t6] {$t_6$};
+
+    % Indices for events
+    \node (ei0) [right= of e0] {$e_0$};
+    \node (ei1) [right= of e1] {$e_1$};
+    \node (ei2) [right= of e2] {$e_2$};
+    \node (ei5) [right= of e5] {$e_{14}$};
+    \node (ei6) [right= of e6] {$e_{15}$};
+
+    % Indices for resources
+    \node (ri0) [right= of r0] {$r_0$};
+    \node (ri1) [right= of r1] {$r_1$};
+    \node (ri2) [right= of r2] {$r_2$};
+    \node (ri5) [right= of r5] {$r_{21}$};
+    \node (ri6) [right= of r6] {$r_{22}$};
+
+    % Arrows for times
+    \draw[arrow] (t0.east) -- (ti0.west);
+    \draw[arrow] (t1.east) -- (ti1.west);
+    \draw[arrow] (t2.east) -- (ti2.west);
+    \draw[arrow] (t5.east) -- (ti5.west);
+    \draw[arrow] (t6.east) -- (ti6.west);
+
+    % Arrows for events
+    \draw[arrow] (e0.east) -- (ei0.west);
+    \draw[arrow] (e1.east) -- (ei1.west);
+    \draw[arrow] (e2.east) -- (ei2.west);
+    \draw[arrow] (e5.east) -- (ei5.west);
+    \draw[arrow] (e6.east) -- (ei6.west);
+
+    % Arrows for resources
+    \draw[arrow] (r0.east) -- (ri0.west);
+    \draw[arrow] (r1.east) -- (ri1.west);
+    \draw[arrow] (r2.east) -- (ri2.west);
+    \draw[arrow] (r5.east) -- (ri5.west);
+    \draw[arrow] (r6.east) -- (ri6.west);
+
+    % % Labels for columns
+    \node[above=0.32cm of t0, xshift=0.8cm] {Times};
+    \node[above=0.32cm of e0, xshift=0.85cm] {Events};
+    \node[above=0.32cm of r0, xshift=0.88cm] {Resources};
+
+    \draw (-1.42cm,0.54cm) -- ++(13.4,0);
+    \draw (3.1cm,1.3cm) -- ++(0,-5.5cm);
+    \draw (7.8cm,1.3cm) -- ++(0,-5.5cm);
+
+\end{tikzpicture}

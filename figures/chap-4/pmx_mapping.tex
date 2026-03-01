@@ -1,0 +1,129 @@
+\begin{tikzpicture}
+    % Define styles for the nodes
+    \tikzstyle{cell} = [
+        rectangle, text centered, draw,
+        minimum width=0.75cm, minimum height=0.75cm
+    ]
+
+    \tikzstyle{arrow} = [thick]
+
+    % Parent A
+    \node[cell]                             (a0)                {1};
+    \node[cell, anchor=west]                (a1) at (a0.east)   {7};
+    \node[cell, anchor=west, fill=blue!40]  (a2) at (a1.east)   {3};
+    \node[cell, anchor=west, fill=blue!40]  (a3) at (a2.east)   {2};
+    \node[cell, anchor=west, fill=blue!40]  (a4) at (a3.east)   {6};
+    \node[cell, anchor=west]                (a5) at (a4.east)   {4};
+    \node[cell, anchor=west]                (a6) at (a5.east)   {8};
+    \node[cell, anchor=west]                (a7) at (a6.east)   {5};
+
+    \node[
+        anchor=west, xshift=-0.05cm, yshift=0.9cm, inner sep=0
+    ] (parent_a) at (a0.west) {\textbf{Parent A}};
+
+    % Parent B
+    \node[cell, anchor=west, xshift=1.4cm]  (b0) at (a7.east)   {7};
+    \node[cell, anchor=west]                (b1) at (b0.east)   {4};
+    \node[cell, anchor=west, fill=green!40] (b2) at (b1.east)   {1};
+    \node[cell, anchor=west, fill=green!40] (b3) at (b2.east)   {3};
+    \node[cell, anchor=west, fill=green!40] (b4) at (b3.east)   {5};
+    \node[cell, anchor=west]                (b5) at (b4.east)   {2};
+    \node[cell, anchor=west]                (b6) at (b5.east)   {8};
+    \node[cell, anchor=west]                (b7) at (b6.east)   {6};
+
+    \node[
+        anchor=west, xshift=-0.05cm, yshift=0.9cm, inner sep=0
+    ] (parent_b) at (b0.west) {\textbf{Parent B}};
+
+
+    % Map B -> A
+    \node[cell, below=1cm of a2, fill=green!40] (map_ba00) {1};
+    \node[cell, anchor=west, fill=green!40] (map_ba01) at (map_ba00.east) {3};
+    \node[cell, anchor=west, fill=green!40] (map_ba02) at (map_ba01.east) {5};
+
+    \node[cell, below=0.6cm of map_ba00, fill=blue!40] (map_ba10) {3};
+    \node[cell, anchor=west, fill=blue!40] (map_ba11) at (map_ba10.east) {2};
+    \node[cell, anchor=west, fill=blue!40] (map_ba12) at (map_ba11.east) {6};
+
+    % Map A -> B
+    \node[cell, below=1cm of b2, fill=blue!40] (map_ab00) {3};
+    \node[cell, anchor=west, fill=blue!40] (map_ab01) at (map_ab00.east) {2};
+    \node[cell, anchor=west, fill=blue!40] (map_ab02) at (map_ab01.east) {6};
+
+    \node[cell, below=0.6cm of map_ab00, fill=green!40] (map_ab10) {1};
+    \node[cell, anchor=west, fill=green!40] (map_ab11) at (map_ab10.east) {3};
+    \node[cell, anchor=west, fill=green!40] (map_ab12) at (map_ab11.east) {5};
+
+
+    % Child A
+    \node[cell, below=4.125cm of a0]        (ca0)               {2};
+    \node[cell, anchor=west]                (ca1) at (ca0.east) {7};
+    \node[cell, anchor=west, fill=green!40] (ca2) at (ca1.east) {1};
+    \node[cell, anchor=west, fill=green!40] (ca3) at (ca2.east) {3};
+    \node[cell, anchor=west, fill=green!40] (ca4) at (ca3.east) {5};
+    \node[cell, anchor=west]                (ca5) at (ca4.east) {4};
+    \node[cell, anchor=west]                (ca6) at (ca5.east) {8};
+    \node[cell, anchor=west]                (ca7) at (ca6.east) {6};
+
+    \node[
+        anchor=west, xshift=-0.05cm, yshift=-0.9cm, inner sep=0
+    ] (child_a) at (ca0.west) {\textbf{Child A}};
+
+    % Child B
+    \node[cell, below=4.125cm of b0]        (cb0)               {7};
+    \node[cell, anchor=west]                (cb1) at (cb0.east) {4};
+    \node[cell, anchor=west, fill=blue!40] (cb2) at (cb1.east) {3};
+    \node[cell, anchor=west, fill=blue!40] (cb3) at (cb2.east) {2};
+    \node[cell, anchor=west, fill=blue!40] (cb4) at (cb3.east) {6};
+    \node[cell, anchor=west]                (cb5) at (cb4.east) {1};
+    \node[cell, anchor=west]                (cb6) at (cb5.east) {8};
+    \node[cell, anchor=west]                (cb7) at (cb6.east) {5};
+
+    \node[
+        anchor=west, xshift=-0.05cm, yshift=-0.9cm, inner sep=0
+    ] (child_b) at (cb0.west) {\textbf{Child B}};
+
+    % Arrows 1
+    \draw[arrow, ->, orange, out=270, in=90] (a0.south) to (map_ba00.north);
+    \draw[arrow, orange] (map_ba00.south) to (map_ba10.north);
+    \draw[arrow, orange] (map_ba10.north) to (map_ba01.south);
+    \draw[arrow, orange] (map_ba01.south) to (map_ba11.north);
+    \draw[arrow, ->, orange, out=260, in=80] (map_ba11.south) to (ca0.north);
+
+    % Arrow 2
+    \draw[arrow, ->, black] (a1.south) to (ca1.north);
+
+    % Arrow 3
+    \draw[arrow, ->, black] (a5.south) to (ca5.north);
+
+    % Arrow 4
+    \draw[arrow, ->, black] (a6.south) to (ca6.north);
+
+    % Arrow 5
+    \draw[arrow, ->, cyan, out=260, in=80] (a7.south) to (map_ba02.north);
+    \draw[arrow, cyan] (map_ba02.south) to (map_ba12.north);
+    \draw[arrow, ->, cyan, out=280, in=100] (map_ba12.south) to (ca7.north);
+
+
+    % Arrow 6
+    \draw[arrow, ->] (b0.south) to (cb0.north);
+
+    % Arrow 7
+    \draw[arrow, ->] (b1.south) to (cb1.north);
+
+    % Arrow 8
+    \draw[arrow, ->, red, out=270, in=90] (b5.south) to (map_ab01.north);
+    \draw[arrow, red] (map_ab01.south) to (map_ab11.north);
+    \draw[arrow, red] (map_ab11.north) to (map_ab00.south);
+    \draw[arrow, red] (map_ab00.south) to (map_ab10.north);
+    \draw[arrow, ->, red, out=280, in=110] (map_ab10.south) to (cb5.north);
+
+    % Arrow 9
+    \draw[arrow, ->] (b6.south) to (cb6.north);
+
+    % Arrow 10
+    \draw[arrow, ->, blue, out=270, in=70] (b7.south) to (map_ab02.north);
+    \draw[arrow, blue] (map_ab02.south) to (map_ab12.north);
+    \draw[arrow, ->, blue, out=290, in=100] (map_ab12.south) to (cb7.north);
+
+\end{tikzpicture}

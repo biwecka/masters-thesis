@@ -1,0 +1,130 @@
+\begin{tikzpicture}[
+    cell/.style={draw, minimum size=1cm, font=\small},
+    label/.style={font=\small, align=center},
+    arrow/.style={-stealth, thick},
+    desc/.style={align=left}
+]
+    % Matrix dimensions
+    \def\rows{4}
+    \def\cols{6}
+
+    % r0
+    \node [cell, fill=gray!40] (e0r0) at (-0, 0) {1};
+    \node [cell, fill=blue!40] (e1r0) at (-1, 0) {};
+        \node (e1r0_text) at (-1, 0) {1};
+    \node [cell, fill=blue!10] (e2r0) at (-2, 0) {};
+    \node [cell, fill=blue!10] (e3r0) at (-3, 0) {};
+    \node [cell, fill=blue!10] (e4r0) at (-4, 0) {};
+    \node [cell, fill=blue!10] (e5r0) at (-5, 0) {};
+
+    % r1
+    \node [cell, fill=gray!20] (e0r1) at (-0, 1) {};
+    \node [cell] (e1r1) at (-1, 1) {};
+    \node [cell] (e2r1) at (-2, 1) {1};
+    \node [cell] (e3r1) at (-3, 1) {1};
+    \node [cell] (e4r1) at (-4, 1) {};
+    \node [cell] (e5r1) at (-5, 1) {};
+
+    % r2
+    \node [cell, fill=gray!20] (e0r2) at (-0, 2) {};
+    \node [cell] (e1r2) at (-1, 2) {};
+    \node [cell] (e2r2) at (-2, 2) {};
+    \node [cell] (e3r2) at (-3, 2) {};
+    \node [cell] (e4r2) at (-4, 2) {1};
+    \node [cell] (e5r2) at (-5, 2) {1};
+
+    % r3
+    \node [cell, fill=gray!40] (e0r3) at (-0, 3) {1};
+    \node [cell, fill=green!20] (e1r3) at (-1, 3) {};
+    \node [cell, fill=green!40] (e2r3) at (-2, 3) {};
+        \node (e2r3_text) at (-2, 3) {1};
+    \node [cell, fill=green!20] (e3r3) at (-3, 3) {};
+    \node [cell, fill=green!40] (e4r3) at (-4, 3) {};
+        \node (e4r3_text) at (-4, 3) {1};
+    \node [cell, fill=green!20] (e5r3) at (-5, 3) {};
+
+    % Add row labels (r_0, r_1, ..., r_3)
+    \foreach \row in {0,...,3} {
+        \node[label, right=0.60cm] at (0, \row) {$r_{\row}$};
+    }
+
+    % Add column labels (e_0, e_1, ..., e_5)
+    \foreach \col [count=\x from 0] in {5,...,0} {
+        \node[label, below=0.16cm] (e_\x) at (-\x, -0.5) {$e_{\x}$};
+    }
+
+
+    % Arrows from ones to the their corresponding event index.
+    \draw[arrow, orange]
+        ([shift={(240:0.24cm)}]e1r0_text.center)
+        to[out=240, in=102]
+        ([shift={(120:0.25cm)}]e_1.center);
+
+    \draw[arrow, orange]
+        ([shift={(250:0.28cm)}]e2r3_text.center)
+        to[out=260, in=102]
+        ([shift={(120:0.25cm)}]e_2.center);
+
+    \draw[arrow, orange]
+        ([shift={(250:0.28cm)}]e4r3_text.center)
+        to[out=260, in=102]
+        ([shift={(120:0.25cm)}]e_4.center);
+
+    % Description text
+    \node [desc, right=of e0r2, xshift=0.25cm, yshift=-0.48cm] (desc_text) {
+        Calculate a collision\\
+        vector for event $e_0$.
+    };
+
+    \draw[arrow]
+        ([shift={(270:0.0cm)}]desc_text.south)
+        to[out=270, in=0]
+        ([shift={(0:0.25cm)}]e_0.center);
+
+    % Resulting collision vector
+    \node [cell, below of=e_0, yshift=-0.8cm] (cv0) {0};
+    \node [cell, below of=e_1, yshift=-0.8cm, fill=blue!40] (cv1) {1};
+    \node [cell, below of=e_2, yshift=-0.8cm, fill=green!40] (cv2) {1};
+    \node [cell, below of=e_3, yshift=-0.8cm] (cv3) {0};
+    \node [cell, below of=e_4, yshift=-0.8cm, fill=green!40] (cv4) {1};
+    \node [cell, below of=e_5, yshift=-0.8cm] (cv5) {0};
+
+    \draw[arrow] (e_1) -- (cv1);
+    \draw[arrow] (e_2) -- (cv2);
+    \draw[arrow] (e_4) -- (cv4);
+
+    % Collision Vector Description
+    \node [desc, right=of cv0, xshift=0.25cm] (desc_cv) {
+        The resulting collision\\
+        vector shows, that $e_0$\\
+        has resource collisions\\
+        with the events $e_1$, $e_2$\\
+        and $e_4$.
+    };
+
+    \draw[arrow]
+        ([shift={(0:0.0cm)}]cv0.east)
+        --
+        ([shift={(180:0.1cm)}]desc_cv.west);
+
+    % Angle bracket for resource allocation matrix
+    \draw[decorate, decoration={brace, amplitude=10pt, mirror}, thick]
+        ([xshift=-1.0cm]e5r3.north)
+        --
+        ([xshift=-1.0cm]e5r0.south)
+            node[midway, align=center, left=12pt] (bracket) {};
+
+    % Description of the resource allocation matrix
+    \node[desc, align=left, above=of bracket, xshift=3cm, yshift=1.6cm]
+        (resource_matrix_desc)
+    {
+        Resource allocation matrix as provided by\\the \textit{hdtt4} and
+        \textit{hdtt5} problem instances.
+    };
+
+    \draw[arrow]
+        ([shift={(0.1cm,0)}]bracket.center)
+        -- ++(-0.5cm, 0cm)
+        -- ++(0cm, 2.6cm);
+
+\end{tikzpicture}

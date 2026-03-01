@@ -1,0 +1,63 @@
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines=middle, % Draw axes
+        xlabel={$generation$}, % Label x-axis
+        ylabel={$selection$ $pressure$}, % Label y-axis
+        domain=0:10, % Domain for cosine wave (1.5 wavelength)
+        xmin=0, xmax=16, % Adjust x-axis range
+        ymin=0, ymax=6, % Adjust y-axis range
+        xtick=\empty, % Remove automatic x-ticks
+        ytick={1, 5}, % Set custom y-ticks
+        yticklabels={1, $c$}, % Custom labels for y-ticks
+        samples=100, % Number of samples for smooth curve
+        width=12cm, % Width of the plot
+        height=7cm, % Height of the plot
+        axis on top % ensures that the axis are rendered on top
+        % smooth, % Smooth curves
+    ]
+        \addplot[black, thick, domain=0:2] {1};
+        % \draw[-, black, dotted] (axis cs:2.0,1.0) -- (axis cs:2.0,2.0);
+
+        \addplot[black, thick, domain=2:4] {2};
+        \draw[-, black, dotted] (axis cs:4.0,2.0) -- (axis cs:4.0,3.0);
+
+        \addplot[black, thick, domain=4:6] {3};
+        \draw[-, black, dotted] (axis cs:6.0,3.0) -- (axis cs:6.0,4.0);
+
+        \addplot[black, thick, domain=6:8] {4};
+        % \draw[-, black, dotted] (axis cs:8.0,4.0) -- (axis cs:8.0,5.0);
+
+        \addplot[black, thick, domain=8:12] {5};
+        \draw[-, black, dotted] (axis cs:12.0,2.85) -- (axis cs:12.0,1.0);
+
+        \addplot[black, thick, domain=12:14] {1};
+        \draw[-, black, dotted] (axis cs:14.0,1.0) -- (axis cs:14.0,2.0);
+
+        \addplot[black, thick, domain=14:16] {2};
+
+        % Maximum
+        \addplot[orange, dashed, domain=0:8] {5};
+        \addplot[orange, dashed, domain=12:16] {5};
+
+        % Step size
+        \draw[-, red, dashed] (axis cs:2.0,0.35) -- (axis cs:2.0,2.0);
+        \draw[-, red, dashed] (axis cs:4.0,0.35) -- (axis cs:4.0,2.0);
+        \draw[<->, red, thick]
+            (axis cs:2.0,0.5) -- (axis cs:4.0,0.5)
+            node[midway, below, black] {$a$};
+
+        % Step value
+        \draw[-, blue, dashed] (axis cs:2.85,3.0) -- (axis cs:4.0,3.0);
+        \draw[<->, blue, thick]
+            (axis cs:3.0,3.0) -- (axis cs:3.0,2.0)
+            node[midway, left, black] {$b$};
+
+        % Generations at peak
+        \draw[-, teal, dashed] (axis cs:8.0,2.85) -- (axis cs:8.0,5.0);
+        \draw[-, teal, dashed] (axis cs:12.0,2.85) -- (axis cs:12.0,5.0);
+        \draw[<->, teal, thick]
+            (axis cs:8.0,3.0) -- (axis cs:12.0,3.0)
+            node[midway, below, black] {$d$};
+    \end{axis}
+
+\end{tikzpicture}

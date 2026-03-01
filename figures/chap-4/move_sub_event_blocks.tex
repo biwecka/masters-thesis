@@ -1,0 +1,242 @@
+\begin{tikzpicture}
+    % Define styles for the nodes
+    \tikzstyle{cell} = [
+        text centered, draw,
+        minimum height=1cm,
+        minimum width=1cm
+    ]
+    \tikzstyle{index} = [
+        text centered,
+        minimum height=1cm,
+        minimum width=1cm,
+        yshift=-0.14cm
+    ]
+
+    \tikzstyle{block_index} = [
+        text centered,
+        align=left,
+        minimum height=0.5cm,
+        minimum width=1cm,
+        % text width=1cm,
+    ]
+
+    \tikzstyle{cell_sm} = [
+        text centered, draw,
+        minimum height=0.5cm,
+        minimum width=0.5cm
+    ]
+
+    \tikzstyle{index_sm} = [
+        text centered,
+        minimum height=0.5cm,
+        minimum width=0.5cm,
+        yshift=-0.4cm
+    ]
+
+    \node (x0)
+        [cell, pattern color=purple!50, pattern=crosshatch]
+        {0};
+
+    \node (x1)
+        [cell, right=0 of x0, fill=blue!50]
+        {1};
+
+    \node (x2)
+        [cell, right=0 of x1, fill=blue!50]
+        {1};
+
+    \node (x3)
+        [cell, right=0 of x2, pattern color=orange!50, pattern=crosshatch]
+        {0};
+
+    \node (x4)
+        [cell, right=0 of x3, pattern color=orange!50, pattern=crosshatch]
+        {0};
+
+    \node (x5)
+        [cell, right=0 of x4, pattern color=orange!50, pattern=crosshatch]
+        {0};
+
+    \node (x6)
+        [cell, right=0 of x5, fill=teal!50]
+        {1};
+
+    \node (x7)
+        [cell, right=0 of x6, pattern color=magenta!50, pattern=crosshatch]
+        {0};
+
+    \node (x8)
+        [cell, right=0 of x7, fill=cyan!50]
+        {1};
+
+    \node (x9)
+        [cell, right=0 of x8, fill=cyan!50]
+        {1};
+
+    \node [index, above of=x0] {$t_9$};
+    \node [index, above of=x1] {$t_8$};
+    \node [index, above of=x2] {$t_7$};
+    \node [index, above of=x3] {$t_6$};
+    \node [index, above of=x4] {$t_5$};
+    \node [index, above of=x5] {$t_4$};
+    \node [index, above of=x6] {$t_3$};
+    \node [index, above of=x7] {$t_2$};
+    \node [index, above of=x8] {$t_1$};
+    \node [index, above of=x9] {$t_0$};
+
+
+    % BLOCKS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \node (block_i0)
+        [block_index, below of=x0, yshift=-1.7cm, xshift=-1.7cm]
+        {0 $\rightarrow$};
+    \node (block_0_9) [cell_sm, right=0 of block_i0]    {0};
+    \node (block_0_8) [cell_sm, right=0 of block_0_9]   {0};
+    \node (block_0_7) [cell_sm, right=0 of block_0_8]   {0};
+    \node (block_0_6) [cell_sm, right=0 of block_0_7]   {0};
+    \node (block_0_5) [cell_sm, right=0 of block_0_6]   {0};
+    \node (block_0_4) [cell_sm, right=0 of block_0_5]   {0};
+    \node (block_0_3) [cell_sm, right=0 of block_0_4]   {0};
+    \node (block_0_2) [cell_sm, right=0 of block_0_3]   {0};
+    \node (block_0_1) [cell_sm, right=0 of block_0_2]   {0};
+    \node (block_0_0) [cell_sm, right=0 of block_0_1]   {0};
+
+    \node [above=1.3cm of block_i0.west, anchor=west] {\textbf{Block} start indices:};
+
+    \node [index_sm, above of=block_0_9] {$t_9$};
+    \node [index_sm, above of=block_0_8] {$t_8$};
+    \node [index_sm, above of=block_0_7] {$t_7$};
+    \node [index_sm, above of=block_0_6] {$t_6$};
+    \node [index_sm, above of=block_0_5] {$t_5$};
+    \node [index_sm, above of=block_0_4] {$t_4$};
+    \node [index_sm, above of=block_0_3] {$t_3$};
+    \node [index_sm, above of=block_0_2] {$t_2$};
+    \node [index_sm, above of=block_0_1] {$t_1$};
+    \node [index_sm, above of=block_0_0] {$t_0$};
+
+    \node (block_i1)
+        [block_index, below of=block_i0, yshift=0.2cm]
+        {1 $\rightarrow$};
+    \node (block_1_9) [cell_sm, right=0 of block_i1]    {0};
+    \node (block_1_8) [cell_sm, right=0 of block_1_9]   {0};
+    \node (block_1_7) [cell_sm, right=0 of block_1_8]   {0};
+    \node (block_1_6) [cell_sm, right=0 of block_1_7]   {0};
+    \node (block_1_5) [cell_sm, right=0 of block_1_6]   {0};
+    \node (block_1_4) [cell_sm, right=0 of block_1_5]   {0};
+    \node (block_1_3) [cell_sm, right=0 of block_1_4, fill=teal!50] {1};
+    \node (block_1_2) [cell_sm, right=0 of block_1_3]   {0};
+    \node (block_1_1) [cell_sm, right=0 of block_1_2]   {0};
+    \node (block_1_0) [cell_sm, right=0 of block_1_1]   {0};
+
+    \node (block_i2)
+        [block_index, below of=block_i1, yshift=0.2cm]
+        {2 $\rightarrow$};
+    \node (block_2_9) [cell_sm, right=0 of block_i2]    {0};
+    \node (block_2_8) [cell_sm, right=0 of block_2_9]   {0};
+    \node (block_2_7) [cell_sm, right=0 of block_2_8]   {0};
+    \node (block_2_6) [cell_sm, right=0 of block_2_7, fill=blue!50] {1};
+    \node (block_2_5) [cell_sm, right=0 of block_2_6]   {0};
+    \node (block_2_4) [cell_sm, right=0 of block_2_5]   {0};
+    \node (block_2_3) [cell_sm, right=0 of block_2_4]   {0};
+    \node (block_2_2) [cell_sm, right=0 of block_2_3]   {0};
+    \node (block_2_1) [cell_sm, right=0 of block_2_2]   {0};
+    \node (block_2_0) [cell_sm, right=0 of block_2_1, fill=cyan!50] {1};
+
+    \node (block_i3)
+        [block_index, below of=block_i2, yshift=0.2cm]
+        {3 $\rightarrow$};
+    \node (block_3_9) [cell_sm, right=0 of block_i3]    {0};
+    \node (block_3_8) [cell_sm, right=0 of block_3_9]   {0};
+    \node (block_3_7) [cell_sm, right=0 of block_3_8]   {0};
+    \node (block_3_6) [cell_sm, right=0 of block_3_7]   {0};
+    \node (block_3_5) [cell_sm, right=0 of block_3_6]   {0};
+    \node (block_3_4) [cell_sm, right=0 of block_3_5]   {0};
+    \node (block_3_3) [cell_sm, right=0 of block_3_4]   {0};
+    \node (block_3_2) [cell_sm, right=0 of block_3_3]   {0};
+    \node (block_3_1) [cell_sm, right=0 of block_3_2]   {0};
+    \node (block_3_0) [cell_sm, right=0 of block_3_1]   {0};
+
+
+    % HOLES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \node (hole_i0)
+        [block_index, right=1.0cm of block_0_0]
+        {0 $\rightarrow$};
+    \node (hole_0_9) [cell_sm, right=0 of hole_i0, pattern color=purple!80, pattern=crosshatch] {1};
+    \node (hole_0_8) [cell_sm, right=0 of hole_0_9]   {0};
+    \node (hole_0_7) [cell_sm, right=0 of hole_0_8]   {0};
+    \node (hole_0_6) [cell_sm, right=0 of hole_0_7]   {0};
+    \node (hole_0_5) [cell_sm, right=0 of hole_0_6]   {0};
+    \node (hole_0_4) [cell_sm, right=0 of hole_0_5]   {0};
+    \node (hole_0_3) [cell_sm, right=0 of hole_0_4]   {0};
+    \node (hole_0_2) [cell_sm, right=0 of hole_0_3, pattern color=magenta!80, pattern=crosshatch]   {1};
+    \node (hole_0_1) [cell_sm, right=0 of hole_0_2]   {0};
+    \node (hole_0_0) [cell_sm, right=0 of hole_0_1]   {0};
+
+    \node [above=1.3cm of hole_i0.west, anchor=west] {\textbf{Hole} start indices:};
+
+    \node [index_sm, above of=hole_0_9] {$t_9$};
+    \node [index_sm, above of=hole_0_8] {$t_8$};
+    \node [index_sm, above of=hole_0_7] {$t_7$};
+    \node [index_sm, above of=hole_0_6] {$t_6$};
+    \node [index_sm, above of=hole_0_5] {$t_5$};
+    \node [index_sm, above of=hole_0_4] {$t_4$};
+    \node [index_sm, above of=hole_0_3] {$t_3$};
+    \node [index_sm, above of=hole_0_2] {$t_2$};
+    \node [index_sm, above of=hole_0_1] {$t_1$};
+    \node [index_sm, above of=hole_0_0] {$t_0$};
+
+    \node (hole_i1)
+        [block_index, below of=hole_i0, yshift=0.2cm]
+        {1 $\rightarrow$};
+    \node (hole_1_9) [cell_sm, right=0 of hole_i1]    {0};
+    \node (hole_1_8) [cell_sm, right=0 of hole_1_9]   {0};
+    \node (hole_1_7) [cell_sm, right=0 of hole_1_8]   {0};
+    \node (hole_1_6) [cell_sm, right=0 of hole_1_7]   {0};
+    \node (hole_1_5) [cell_sm, right=0 of hole_1_6]   {0};
+    \node (hole_1_4) [cell_sm, right=0 of hole_1_5]   {0};
+    \node (hole_1_3) [cell_sm, right=0 of hole_1_4]   {0};
+    \node (hole_1_2) [cell_sm, right=0 of hole_1_3]   {0};
+    \node (hole_1_1) [cell_sm, right=0 of hole_1_2]   {0};
+    \node (hole_1_0) [cell_sm, right=0 of hole_1_1]   {0};
+
+    \node (hole_i2)
+        [block_index, below of=hole_i1, yshift=0.2cm]
+        {2 $\rightarrow$};
+    \node (hole_2_9) [cell_sm, right=0 of hole_i2]    {0};
+    \node (hole_2_8) [cell_sm, right=0 of hole_2_9]   {0};
+    \node (hole_2_7) [cell_sm, right=0 of hole_2_8]   {0};
+    \node (hole_2_6) [cell_sm, right=0 of hole_2_7]   {0};
+    \node (hole_2_5) [cell_sm, right=0 of hole_2_6]   {0};
+    \node (hole_2_4) [cell_sm, right=0 of hole_2_5]   {0};
+    \node (hole_2_3) [cell_sm, right=0 of hole_2_4]   {0};
+    \node (hole_2_2) [cell_sm, right=0 of hole_2_3]   {0};
+    \node (hole_2_1) [cell_sm, right=0 of hole_2_2]   {0};
+    \node (hole_2_0) [cell_sm, right=0 of hole_2_1]   {0};
+
+    \node (hole_i3)
+        [block_index, below of=hole_i2, yshift=0.2cm]
+        {3 $\rightarrow$};
+    \node (hole_3_9) [cell_sm, right=0 of hole_i3]    {0};
+    \node (hole_3_8) [cell_sm, right=0 of hole_3_9]   {0};
+    \node (hole_3_7) [cell_sm, right=0 of hole_3_8]   {0};
+    \node (hole_3_6) [cell_sm, right=0 of hole_3_7]   {0};
+    \node (hole_3_5) [cell_sm, right=0 of hole_3_6]   {0};
+    \node (hole_3_4) [cell_sm, right=0 of hole_3_5, pattern color=orange!80, pattern=crosshatch] {1};
+    \node (hole_3_3) [cell_sm, right=0 of hole_3_4]   {0};
+    \node (hole_3_2) [cell_sm, right=0 of hole_3_3]   {0};
+    \node (hole_3_1) [cell_sm, right=0 of hole_3_2]   {0};
+    \node (hole_3_0) [cell_sm, right=0 of hole_3_1]   {0};
+
+
+
+    \node (text) [below=2cm of block_i3.west, anchor=west] {Size of the block/hole $\hateq$ duration of the sub event};
+    \draw [->, thick, out=270, in=90]
+        ([xshift=0.25cm, yshift=-0.35cm]block_i3.west)
+        to
+        ([xshift=2.7cm, yshift=0.4cm]text.west);
+
+    \draw [->, thick, out=245, in=90]
+        ([xshift=0.25cm, yshift=-0.35cm]hole_i3.west)
+        to
+        ([xshift=3.7cm, yshift=0.4cm]text.west);
+
+\end{tikzpicture}

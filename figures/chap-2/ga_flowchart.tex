@@ -1,0 +1,40 @@
+\begin{tikzpicture}[node distance=1.2cm]
+
+    % Define styles for the nodes
+    \tikzstyle{startstop} = [
+        rectangle, rounded corners, text centered, draw=black,
+        minimum width=2cm, minimum height=0.75cm
+    ]
+    \tikzstyle{process} = [
+        rectangle, text centered, draw=black,
+        minimum width=4cm, minimum height=0.75cm
+    ]
+    \tikzstyle{decision} = [
+        diamond, text centered, draw=black,
+        minimum width=3cm, minimum height=1cm, aspect=2
+    ]
+    \tikzstyle{arrow} = [thick,->,>=stealth]
+
+    % Nodes
+    \node (start) [startstop] {Start};
+    \node (init) [process, below of=start, yshift=-0.25cm] {Initialize Population};
+    \node (selection) [process, below of=init, yshift=-0.2cm] {Selection};
+    \node (crossover) [process, below of=selection] {Crossover};
+    \node (mutation) [process, below of=crossover] {Mutation};
+    \node (evaluation) [process, below of=mutation] {Evaluation};
+    \node (replacement) [process, below of=evaluation] {Replacement};
+    \node (termination) [decision, below of=replacement, yshift=-0.75cm] {Termination};
+    \node (end) [startstop, below of=termination, yshift=-1cm] {End};
+
+    % Arrows
+    \draw [arrow] (start) -- (init);
+    \draw [arrow] (init) -- (selection);
+    \draw [arrow] (selection) -- (crossover);
+    \draw [arrow] (crossover) -- (mutation);
+    \draw [arrow] (mutation) -- (evaluation);
+    \draw [arrow] (evaluation) -- (replacement);
+    \draw [arrow] (replacement) -- (termination);
+    \draw [arrow] (termination.east) -- ++(2,0) |- ++(0,6.75cm) -- (selection.east) node [xshift=0.25cm, yshift=-6.4cm] {No};
+    \draw [arrow] (termination) -- (end) node [midway, right, yshift=0.25cm] {Yes};
+
+\end{tikzpicture}

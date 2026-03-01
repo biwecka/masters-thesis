@@ -1,0 +1,107 @@
+\begin{tikzpicture}[
+    every node/.style={align=center},
+    bit0/.style={draw, minimum height=0.7cm, minimum width=0.7cm},
+    bit1/.style={draw, minimum height=0.7cm, minimum width=0.7cm, fill=gray!20},
+    event/.style={draw, minimum height=1.2cm, minimum width=1.2cm, text width=1cm},
+    event2/.style={minimum height=1.2cm, minimum width=1.2cm, text width=1cm},
+    arrow/.style={-stealth, thick} % Arrow style
+]
+
+    % Event indices (e_0, e_1, ...)
+    \node[event] (e0) at (0, 0) {$e_0$};
+    \node[event, below=0cm of e0] (e1) {$e_1$};
+    \node[event, below=0cm of e1] (e2) {$e_2$};
+    \node[event2, below=0cm of e2] (ex) {\dots};
+
+    % Bit vectors (16 bits each)
+    \node[bit0, right=1.2cm of e0] (b00) {0};
+    \node[bit0, right=0cm of b00] (b01) {0};
+    \node[bit1, right=0cm of b01] (b02) {1};
+    \node[bit0, right=0cm of b02] (b03) {0};
+    \node[bit0, right=0cm of b03] (b04) {0};
+    \node[bit0, right=0cm of b04] (b05) {0};
+    \node[bit0, right=0cm of b05] (b06) {0};
+    \node[bit0, right=0cm of b06] (b07) {0};
+    \node[bit0, right=0cm of b07] (b08) {0};
+    \node[bit1, right=0cm of b08] (b09) {1};
+    \node[bit0, right=0cm of b09] (b10) {0};
+    \node[bit0, right=0cm of b10] (b11) {0};
+    \node[bit0, right=0cm of b11] (b12) {0};
+    \node[bit0, right=0cm of b12] (b13) {0};
+    \node[bit1, right=0cm of b13] (b14) {1};
+    \node[bit1, right=0cm of b14] (b15) {1};
+
+    % Bit vector indices
+    \node [above of=b15, yshift=-0.30cm] (i0) {$t_0$};
+    \node [above of=b14, yshift=-0.30cm] (i1) {$t_1$};
+    \node [above of=b13, yshift=-0.30cm] (i2) {$t_2$};
+    \node [above of=b12, yshift=-0.30cm] (i3) {$t_3$};
+    \node [above of=b11, yshift=-0.30cm] (i4) {$t_4$};
+    \node [above of=b10, yshift=-0.30cm] (i5) {$t_5$};
+    \node [above of=b09, yshift=-0.30cm] (i6) {$t_6$};
+    \node [above of=b08, yshift=-0.30cm] (i7) {$t_7$};
+    \node [above of=b07, yshift=-0.30cm] (i8) {$t_8$};
+    \node [above of=b06, yshift=-0.30cm] (i9) {$t_9$};
+    \node [above of=b05, yshift=-0.30cm] (i10) {$t_{10}$};
+    \node [above of=b04, yshift=-0.30cm] (i11) {$t_{11}$};
+    \node [above of=b03, yshift=-0.30cm] (i12) {$t_{12}$};
+    \node [above of=b02, yshift=-0.30cm] (i13) {$t_{13}$};
+    \node [above of=b01, yshift=-0.30cm] (i14) {$t_{14}$};
+    \node [above of=b00, yshift=-0.30cm] (i15) {$t_{15}$};
+
+    % Repeat for e_1
+    \node[bit0, right=1.2cm of e1] (c00) {0};
+    \node[bit0, right=0cm of c00] (c01) {0};
+    \node[bit0, right=0cm of c01] (c02) {0};
+    \node[bit0, right=0cm of c02] (c03) {0};
+    \node[bit1, right=0cm of c03] (c04) {1};
+    \node[bit0, right=0cm of c04] (c05) {0};
+    \node[bit0, right=0cm of c05] (c06) {0};
+    \node[bit0, right=0cm of c06] (c07) {0};
+    \node[bit0, right=0cm of c07] (c08) {0};
+    \node[bit1, right=0cm of c08] (c09) {1};
+    \node[bit0, right=0cm of c09] (c10) {0};
+    \node[bit0, right=0cm of c10] (c11) {0};
+    \node[bit0, right=0cm of c11] (c12) {0};
+    \node[bit1, right=0cm of c12] (c13) {1};
+    \node[bit0, right=0cm of c13] (c14) {0};
+    \node[bit0, right=0cm of c14] (c15) {0};
+
+    % Repeat for e_2
+    \node[bit0, right=1.2cm of e2] (d00) {0};
+    \node[bit0, right=0cm of d00] (d01) {0};
+    \node[bit1, right=0cm of d01] (d02) {1};
+    \node[bit1, right=0cm of d02] (d03) {1};
+    \node[bit0, right=0cm of d03] (d04) {0};
+    \node[bit0, right=0cm of d04] (d05) {0};
+    \node[bit0, right=0cm of d05] (d06) {0};
+    \node[bit1, right=0cm of d06] (d07) {1};
+    \node[bit1, right=0cm of d07] (d08) {1};
+    \node[bit0, right=0cm of d08] (d09) {0};
+    \node[bit0, right=0cm of d09] (d10) {0};
+    \node[bit0, right=0cm of d10] (d11) {0};
+    \node[bit1, right=0cm of d11] (d12) {1};
+    \node[bit1, right=0cm of d12] (d13) {1};
+    \node[bit0, right=0cm of d13] (d14) {0};
+    \node[bit0, right=0cm of d14] (d15) {0};
+
+    % Arrows connecting indices to bit vectors
+    \draw[arrow] (e0.east) -- (b00.west);
+    \draw[arrow] (e1.east) -- (c00.west);
+    \draw[arrow] (e2.east) -- (d00.west);
+
+    % Angle bracket for events
+    \draw[decorate, decoration={brace, amplitude=10pt, mirror}, thick]
+        ([xshift=-0.05cm, yshift=-0.34cm]ex.west)
+            -- ([xshift=0.05cm, yshift=-0.34cm]ex.east)
+        node[midway, below=12pt, font=\small]
+        {corresponds to\\\lstinline[language=Rust]{Vec<...>} };
+
+    % Angle bracket for bitvec
+    \draw[decorate, decoration={brace, amplitude=10pt, mirror}, thick]
+        ([xshift=-0.35cm, yshift=-1.2cm]d00.south)
+            -- ([xshift=0.35cm, yshift=-1.2cm]d15.south)
+        node[midway, below=12pt, font=\small]
+        {corresponds to \lstinline[language=Rust]{Bits32} };
+
+\end{tikzpicture}

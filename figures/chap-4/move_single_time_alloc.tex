@@ -1,0 +1,155 @@
+\begin{tikzpicture}
+    % Plot bellcurve
+    \begin{axis}[
+        name=bellcurve_plot,
+        axis lines=middle,
+        xlabel={}, % $gene$},
+        ylabel={$propability$ $density$},
+        xtick=\empty,
+        ytick=\empty,
+        domain=-3.5:6.5,
+        xmin=-3.5,
+        xmax=6.5,
+        ymin=0.0,
+        ymax=0.3,
+        % xscale=2,
+        samples=1000,
+        width=7.72cm,
+        height=4cm,
+        axis on top % ensures that the axis are rendered on top
+        % smooth,
+    ]
+        % Bell curve
+        \addplot[
+            name path=bellcurve,
+            black, thick
+        % ] {exp(-0.5 * x^2) / sqrt(2 * pi)};
+        ] {exp(-0.5 * (x/2)^2) / (2 * sqrt(2 * pi))};
+
+        % Define the x-axis
+        \addplot[
+            name path=xaxis,
+            draw=none
+        ] coordinates {(-3.5,0) (6.5,0)};
+
+        % Fill the area between bell curve and x-axis
+        \addplot[blue!20] fill between[
+            of=bellcurve and xaxis,
+            soft clip={domain=-3.5:-2.5}
+        ];
+        \addplot[blue!20] fill between[
+            of=bellcurve and xaxis,
+            soft clip={domain=-1.5:-0.5}
+        ];
+
+        \addplot[blue!20] fill between[
+            of=bellcurve and xaxis,
+            soft clip={domain=1.5:3.5}
+        ];
+
+        \addplot[blue!20] fill between[
+            of=bellcurve and xaxis,
+            soft clip={domain=4.5:5.5}
+        ];
+
+    \end{axis}
+
+    % Plot constant
+    \begin{axis}[
+        name=constant_plot,
+        at={(bellcurve_plot.east)},
+        anchor=west,
+        xshift=1.2cm,
+        axis lines=middle,
+        xlabel={}, % $gene$},
+        ylabel={$propability$ $density$},
+        xtick=\empty,
+        ytick=\empty,
+        domain=-3.5:6.5,
+        xmin=-3.5,
+        xmax=6.5,
+        ymin=0.0,
+        ymax=0.3,
+        % xscale=2,
+        samples=1000,
+        width=7.72cm,
+        height=4cm,
+        axis on top % ensures that the axis are rendered on top
+        % smooth,
+    ]
+        % Constant
+        \addplot[name path=constant, black, thick] {0.18};
+
+        % Define the x-axis
+        \addplot[
+            name path=xaxis,
+            draw=none
+        ] coordinates {(-3.5,0) (6.5,0)};
+
+        % Fill the area between bell curve and x-axis
+        \addplot[blue!20] fill between[
+            of=constant and xaxis,
+            soft clip={domain=-3.5:-2.5}
+        ];
+        \addplot[blue!20] fill between[
+            of=constant and xaxis,
+            soft clip={domain=-1.5:-0.5}
+        ];
+
+        \addplot[blue!20] fill between[
+            of=constant and xaxis,
+            soft clip={domain=1.5:3.5}
+        ];
+
+        \addplot[blue!20] fill between[
+            of=constant and xaxis,
+            soft clip={domain=4.5:5.5}
+        ];
+
+    \end{axis}
+
+    % Plot bit vectors
+    \tikzstyle{cell} = [
+        rectangle, text centered, draw,
+        minimum width=0.6cm, minimum height=0.6cm
+    ]
+
+    % Left bit vector
+    \node (n0) [
+        cell, right=0 of bellcurve_plot.west, yshift=-1.75cm, fill=blue!30
+    ] {0};
+    \node (n1) [cell, right=0 of n0]                        {1};
+    \node (n2) [cell, right=0 of n1, fill=blue!30]          {0};
+    \node (n3) [cell, right=0 of n2, fill=green!40]         {1}; % "middle"
+    \node (n4) [cell, right=0 of n3]                        {1};
+    \node (n5) [cell, right=0 of n4, fill=blue!30]          {0};
+    \node (n6) [cell, right=0 of n5, fill=blue!30]          {0};
+    \node (n7) [cell, right=0 of n6]                        {1};
+    \node (n8) [cell, right=0 of n7, fill=blue!30]          {0};
+    \node (n9) [cell, right=0 of n8]                        {1};
+
+    \tikzstyle{legend} = [
+        rectangle, minimum width=0.4cm, minimum height=0.4cm
+    ]
+
+    \node(l0_color) [legend, fill=green!40, below=0.75cm of n0] {};
+    \node(l0_text)  [right=0.1cm of l0_color] {Selection};
+
+    \node(l1_color) [legend, fill=blue!30, below=0.2cm of l0_color] {};
+    \node(l1_text)  [right=0.1cm of l1_color, yshift=-0.04cm] {Possible Targets};
+
+    % Right bit vector
+    \node (m0) [
+        cell, right=0 of constant_plot.west, xshift=1.2cm, yshift=-1.75cm, fill=blue!30
+    ] {0};
+    \node (m1) [cell, right=0 of m0]                        {1};
+    \node (m2) [cell, right=0 of m1, fill=blue!30]          {0};
+    \node (m3) [cell, right=0 of m2, fill=green!40]         {1}; % "middle"
+    \node (m4) [cell, right=0 of m3]                        {1};
+    \node (m5) [cell, right=0 of m4, fill=blue!30]          {0};
+    \node (m6) [cell, right=0 of m5, fill=blue!30]          {0};
+    \node (m7) [cell, right=0 of m6]                        {1};
+    \node (m8) [cell, right=0 of m7, fill=blue!30]          {0};
+    \node (m9) [cell, right=0 of m8]                        {1};
+
+\end{tikzpicture}

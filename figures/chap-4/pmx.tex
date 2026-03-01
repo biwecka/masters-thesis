@@ -1,0 +1,66 @@
+\begin{tikzpicture}
+    % Define styles for the nodes
+    \tikzstyle{cell_x2} = [
+        text centered, draw, minimum height=0.75cm,
+        minimum width=1.50cm
+    ]
+    \tikzstyle{cell_x3} = [
+            text centered, draw, minimum height=0.75cm,
+        minimum width=2.25cm
+    ]
+
+    % Parent A
+    \node[cell_x2] (al) {$a_l$};
+    \node[cell_x3, anchor=west, fill=blue!40] (am) at (al.east) {$a_m$};
+    \node[cell_x3, anchor=west] (ar) at (am.east) {$a_r$};
+
+    % Label for Parent A
+    \node[
+        anchor=west, yshift=0.9cm, inner sep=0
+    ] (parent_a) at (al.west) {\textbf{Parent A}};
+
+    % Parent B
+    \node[cell_x2, anchor=west, xshift=1.4cm] (bl) at (ar.east) {$b_l$};
+    \node[cell_x3, anchor=west, fill=green!40] (bm) at (bl.east) {$b_m$};
+    \node[cell_x3, anchor=west] (br) at (bm.east) {$b_r$};
+
+    \node[
+        anchor=west, yshift=0.9cm, inner sep=0
+    ] (parent_b) at (bl.west) {\textbf{Parent B}};
+
+    % Cut Lines for A
+    \draw[thick, red] (al.east) -- ++(0cm,0.6cm) -- ++(0cm,-1.2cm);
+    \draw[thick, red] (am.east) -- ++(0cm,0.6cm) -- ++(0cm,-1.2cm);
+
+    % Cut Lines for A
+    \draw[thick, red] (bl.east) -- ++(0cm,0.6cm) -- ++(0cm,-1.2cm);
+    \draw[thick, red] (bm.east) -- ++(0cm,0.6cm) -- ++(0cm,-1.2cm);
+
+
+    % Child A
+    \node[cell_x2, below= 2cm of al] (cal) {$a'_l$};
+    \node[cell_x3, anchor=west, fill=green!40] (cam) at (cal.east) {$a'_m = b_m$};
+    \node[cell_x3, anchor=west] (car) at (cam.east) {$a'_r$};
+
+    % Label for Child A
+    \node[
+        anchor=west, yshift=0.9cm, inner sep=0
+    ] (child_a) at (cal.west) {\textbf{Child A}};
+
+
+    % Child B
+    \node[cell_x2, below= 2cm of bl] (cbl) {$b'_l$};
+    \node[cell_x3, anchor=west, fill=blue!40] (cbm) at (cbl.east) {$b'_m = a_m$};
+    \node[cell_x3, anchor=west] (cbr) at (cbm.east) {$b'_r$};
+
+    % Label for Child B
+    \node[
+        anchor=west, yshift=0.9cm, inner sep=0
+    ] (child_b) at (cbl.west) {\textbf{Child B}};
+
+    % Exchange Arrows
+    \draw[->, thick, out=330, in=125] (am.south) to (cbm.north);
+
+    \draw[->, thick, out=220, in=45] (bm.south) to (cam.north);
+
+\end{tikzpicture}

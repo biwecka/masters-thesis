@@ -1,0 +1,134 @@
+\begin{tikzpicture}
+    \tikzstyle{cell} = [
+        rectangle, text centered, draw,
+        minimum width=0.5cm, minimum height=0.5cm
+    ]
+
+    \tikzstyle{label} = [text centered, yshift=-0.4cm]
+
+    \tikzstyle{desc} = [align=left, text width=5cm]
+
+    \tikzstyle{trade_desc} = [
+        anchor=west, xshift=0.5cm, align=center, minimum width=8.95cm
+    ]
+
+    \node (top_spacer) [] {};
+
+    % Text column
+    \node[desc, below=0.6cm of top_spacer] (time_alloc) {Time allocations:};
+    \node[desc, below of=time_alloc] (tradable) {Tradable time slots:};
+    \node[desc, below of=tradable, yshift=-0.2cm] (1st_trade) {First trade:};
+    \node[desc, below of=1st_trade, yshift=-1.1cm] (2nd_trade) {Second trade:};
+
+    % Time allocation 1
+    \node[cell, anchor=west, xshift=0.5cm] (a7) at (time_alloc.east) {0};
+    \node[cell, anchor=west, fill=cyan!40] (a6) at (a7.east) {0};
+    \node[cell, anchor=west] (a5) at (a6.east) {1};
+    \node[cell, anchor=west, fill=green!40] (a4) at (a5.east) {1};
+    \node[cell, anchor=west, fill=blue!40] (a3) at (a4.east) {0};
+    \node[cell, anchor=west] (a2) at (a3.east) {0};
+    \node[cell, anchor=west] (a1) at (a2.east) {1};
+    \node[cell, anchor=west, fill=pink!80] (a0) at (a1.east) {1};
+
+    \node[label, above of=a7] (tia7) {$t_7$};
+    \node[label, above of=a6] (tia6) {$t_6$};
+    \node[label, above of=a5] (tia5) {$t_5$};
+    \node[label, above of=a4] (tia4) {$t_4$};
+    \node[label, above of=a3] (tia3) {$t_3$};
+    \node[label, above of=a2] (tia2) {$t_2$};
+    \node[label, above of=a1] (tia1) {$t_1$};
+    \node[label, above of=a0] (tia0) {$t_0$};
+
+
+    % Time allocation 2
+    \node[cell, anchor=west, xshift=0.75cm] (b7) at (a0.east) {0};
+    \node[cell, anchor=west, fill=cyan!40] (b6) at (b7.east) {1};
+    \node[cell, anchor=west] (b5) at (b6.east) {1};
+    \node[cell, anchor=west, fill=green!40] (b4) at (b5.east) {0};
+    \node[cell, anchor=west, fill=blue!40] (b3) at (b4.east) {1};
+    \node[cell, anchor=west] (b2) at (b3.east) {0};
+    \node[cell, anchor=west] (b1) at (b2.east) {1};
+    \node[cell, anchor=west, fill=pink!80] (b0) at (b1.east) {0};
+
+    \node[label, above of=b7] (tib7) {$t_7$};
+    \node[label, above of=b6] (tib6) {$t_6$};
+    \node[label, above of=b5] (tib5) {$t_5$};
+    \node[label, above of=b4] (tib4) {$t_4$};
+    \node[label, above of=b3] (tib3) {$t_3$};
+    \node[label, above of=b2] (tib2) {$t_2$};
+    \node[label, above of=b1] (tib1) {$t_1$};
+    \node[label, above of=b0] (tib0) {$t_0$};
+
+
+    % Tradable time slots 1
+    \node[cell, anchor=west, xshift=0.5cm] (ta7) at (tradable.east) {0};
+    \node[cell, anchor=west] (ta6) at (ta7.east) {0};
+    \node[cell, anchor=west] (ta5) at (ta6.east) {0};
+    \node[cell, anchor=west, fill=green!40] (ta4) at (ta5.east) {1};
+    \node[cell, anchor=west] (ta3) at (ta4.east) {0};
+    \node[cell, anchor=west] (ta2) at (ta3.east) {0};
+    \node[cell, anchor=west] (ta1) at (ta2.east) {0};
+    \node[cell, anchor=west, fill=pink!80] (ta0) at (ta1.east) {1};
+
+    % Tradable time slots 2
+    \node[cell, anchor=west, xshift=0.75cm] (tb7) at (ta0.east) {0};
+    \node[cell, anchor=west, fill=cyan!40] (tb6) at (tb7.east) {1};
+    \node[cell, anchor=west] (tb5) at (tb6.east) {0};
+    \node[cell, anchor=west] (tb4) at (tb5.east) {0};
+    \node[cell, anchor=west, fill=blue!40] (tb3) at (tb4.east) {1};
+    \node[cell, anchor=west] (tb2) at (tb3.east) {0};
+    \node[cell, anchor=west] (tb1) at (tb2.east) {0};
+    \node[cell, anchor=west] (ta0) at (tb1.east) {0};
+
+    % 1st trade
+    \node[trade_desc] (1st_trade_desc) at (1st_trade.east) {
+        trade $t_4$ for $t_3$
+    };
+
+    % Time allocation 1'
+    \node[cell, anchor=west, yshift=-0.75cm] (a7') at (1st_trade_desc.west) {0};
+    \node[cell, anchor=west] (a6') at (a7'.east) {0};
+    \node[cell, anchor=west] (a5') at (a6'.east) {1};
+    \node[cell, anchor=west, fill=green!40] (a4') at (a5'.east) {0};
+    \node[cell, anchor=west, fill=blue!40] (a3') at (a4'.east) {1};
+    \node[cell, anchor=west] (a2') at (a3'.east) {0};
+    \node[cell, anchor=west] (a1') at (a2'.east) {1};
+    \node[cell, anchor=west] (a0') at (a1'.east) {1};
+
+    % Time allocation 2'
+    \node[cell, anchor=west, xshift=0.75cm] (b7') at (a0'.east) {0};
+    \node[cell, anchor=west] (b6') at (b7'.east) {1};
+    \node[cell, anchor=west] (b5') at (b6'.east) {1};
+    \node[cell, anchor=west, fill=green!40] (b4') at (b5'.east) {1};
+    \node[cell, anchor=west, fill=blue!40] (b3') at (b4'.east) {0};
+    \node[cell, anchor=west] (b2') at (b3'.east) {0};
+    \node[cell, anchor=west] (b1') at (b2'.east) {1};
+    \node[cell, anchor=west] (b0') at (b1'.east) {0};
+
+
+    % 2nd trade
+    \node[trade_desc] (2nd_trade_desc) at (2nd_trade.east) {
+        trade $t_0$ for $t_6$
+    };
+
+    % Time allocation 1''
+    \node[cell, anchor=west, yshift=-0.75cm] (a7'') at (2nd_trade_desc.west) {0};
+    \node[cell, anchor=west, fill=cyan!40] (a6'') at (a7''.east) {1};
+    \node[cell, anchor=west] (a5'') at (a6''.east) {1};
+    \node[cell, anchor=west] (a4'') at (a5''.east) {0};
+    \node[cell, anchor=west] (a3'') at (a4''.east) {1};
+    \node[cell, anchor=west] (a2'') at (a3''.east) {0};
+    \node[cell, anchor=west] (a1'') at (a2''.east) {1};
+    \node[cell, anchor=west, fill=pink!80] (a0'') at (a1''.east) {0};
+
+    % Time allocation 2''
+    \node[cell, anchor=west, xshift=0.75cm] (b7'') at (a0''.east) {0};
+    \node[cell, anchor=west, fill=cyan!40] (b6'') at (b7''.east) {0};
+    \node[cell, anchor=west] (b5'') at (b6''.east) {1};
+    \node[cell, anchor=west] (b4'') at (b5''.east) {1};
+    \node[cell, anchor=west] (b3'') at (b4''.east) {0};
+    \node[cell, anchor=west] (b2'') at (b3''.east) {0};
+    \node[cell, anchor=west] (b1'') at (b2''.east) {1};
+    \node[cell, anchor=west, fill=pink!80] (b0'') at (b1''.east) {1};
+
+\end{tikzpicture}

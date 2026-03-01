@@ -1,0 +1,305 @@
+\begin{tikzpicture}[
+    node distance = 0.6cm,
+    cell/.style={draw, minimum size=0.6cm, font=\small},
+    % label/.style={font=\small, align=center},
+    % arrow/.style={-stealth, thick},
+    desc/.style={align=left, text width=14.3cm},
+]
+    \node(top_spacer) [] {};
+    \node[desc, draw, below=0.2cm of top_spacer] (example_desc) {
+        \textbf{Scenario:} The next event to schedule by the heuristic
+        is $e_1$, which has a duration of $1$. The heuristic chose to
+        evaluate scheduling the event at $t_2$ and $t_1$.
+    };
+
+    % Times matrix
+    \node[cell, below=of example_desc.west, xshift=0.6cm, yshift=-2cm] (t3e5) {0};
+    \node[cell, right of=t3e5]          (t3e4) {0};
+    \node[cell, right of=t3e4]          (t3e3) {0};
+    \node[cell, right of=t3e3]          (t3e2) {0};
+    \node[cell, right of=t3e2]          (t3e1) {0};
+    \node[cell, right of=t3e1]          (t3e0) {0};
+
+    \node[cell, below=0cm of t3e5, fill=blue!50]      (t2e5) {0};
+    \node[cell, right of=t2e5, fill=blue!50]          (t2e4) {0};
+    \node[cell, right of=t2e4, fill=blue!50]          (t2e3) {0};
+    \node[cell, right of=t2e3, fill=blue!50]          (t2e2) {0};
+    \node[cell, right of=t2e2, fill=blue!50]          (t2e1) {0};
+    \node[cell, right of=t2e1, fill=blue!50]          (t2e0) {0};
+
+    \node[cell, below=0cm of t2e5, fill=green!50]      (t1e5) {0};
+    \node[cell, right of=t1e5, fill=green!50]          (t1e4) {0};
+    \node[cell, right of=t1e4, fill=green!50]          (t1e3) {0};
+    \node[cell, right of=t1e3, fill=green!50]          (t1e2) {1};
+    \node[cell, right of=t1e2, fill=green!50]          (t1e1) {0};
+    \node[cell, right of=t1e1, fill=green!50]          (t1e0) {0};
+
+    \node[cell, below=0cm of t1e5]      (t0e5) {0};
+    \node[cell, right of=t0e5]          (t0e4) {0};
+    \node[cell, right of=t0e4]          (t0e3) {0};
+    \node[cell, right of=t0e3]          (t0e2) {1};
+    \node[cell, right of=t0e2]          (t0e1) {0};
+    \node[cell, right of=t0e1]          (t0e0) {0};
+
+    % Times matrix indices -> event
+    \node[above of=t3e5] (t_e5) {$e_5$};
+    \node[above of=t3e4] (t_e4) {$e_4$};
+    \node[above of=t3e3] (t_e3) {$e_3$};
+    \node[above of=t3e2] (t_e2) {$e_2$};
+    \node[above of=t3e1] (t_e1) {$e_1$};
+    \node[above of=t3e0] (t_e0) {$e_0$};
+
+    % Times matrix indices -> time
+    \node[right of=t3e0] (t_t3) {$t_3$};
+    \node[right of=t2e0] (t_t2) {$t_2$};
+    \node[right of=t1e0] (t_t1) {$t_1$};
+    \node[right of=t0e0] (t_t0) {$t_0$};
+
+
+    % Blocked matrix
+    \node[cell, right=of t3e0, xshift=0.75cm] (b3e5) {0};
+    \node[cell, right of=b3e5]          (b3e4) {0};
+    \node[cell, right of=b3e4]          (b3e3) {0};
+    \node[cell, right of=b3e3]          (b3e2) {0};
+    \node[cell, right of=b3e2]          (b3e1) {0};
+    \node[cell, right of=b3e1]          (b3e0) {0};
+
+    \node[cell, below=0cm of b3e5, fill=cyan!40]      (b2e5) {0};
+    \node[cell, right of=b2e5, fill=cyan!40]          (b2e4) {0};
+    \node[cell, right of=b2e4, fill=cyan!40]          (b2e3) {0};
+    \node[cell, right of=b2e3, fill=cyan!40]          (b2e2) {0};
+    \node[cell, right of=b2e2, fill=cyan!40]          (b2e1) {0};
+    \node[cell, right of=b2e1, fill=cyan!40]          (b2e0) {0};
+
+    \node[cell, below=0cm of b2e5, fill=lime!60]      (b1e5) {0};
+    \node[cell, right of=b1e5, fill=lime!60]          (b1e4) {1};
+    \node[cell, right of=b1e4, fill=lime!60]          (b1e3) {1};
+    \node[cell, right of=b1e3, fill=lime!60]          (b1e2) {0};
+    \node[cell, right of=b1e2, fill=lime!60]          (b1e1) {0};
+    \node[cell, right of=b1e1, fill=lime!60]          (b1e0) {1};
+
+    \node[cell, below=0cm of b1e5]      (b0e5) {0};
+    \node[cell, right of=b0e5]          (b0e4) {1};
+    \node[cell, right of=b0e4]          (b0e3) {1};
+    \node[cell, right of=b0e3]          (b0e2) {0};
+    \node[cell, right of=b0e2]          (b0e1) {0};
+    \node[cell, right of=b0e1]          (b0e0) {1};
+
+    % Blocked matrix indices -> event
+    \node[above of=b3e5] (b_e5) {$e_5$};
+    \node[above of=b3e4] (b_e4) {$e_4$};
+    \node[above of=b3e3] (b_e3) {$e_3$};
+    \node[above of=b3e2] (b_e2) {$e_2$};
+    \node[above of=b3e1] (b_e1) {$e_1$};
+    \node[above of=b3e0] (b_e0) {$e_0$};
+
+    % Blocked matrix indices -> time
+    \node[right of=b3e0] (b_t3) {$t_3$};
+    \node[right of=b2e0] (b_t2) {$t_2$};
+    \node[right of=b1e0] (b_t1) {$t_1$};
+    \node[right of=b0e0] (b_t0) {$t_0$};
+
+
+    % Collision matrix
+    \node[cell, right=of b3e0, xshift=0.75cm] (e0e5) {0};
+    \node[cell, right of=e0e5]          (e0e4) {1};
+    \node[cell, right of=e0e4]          (e0e3) {0};
+    \node[cell, right of=e0e3]          (e0e2) {1};
+    \node[cell, right of=e0e2]          (e0e1) {1};
+    \node[cell, right of=e0e1]          (e0e0) {0};
+
+    \node[cell, below=0cm of e0e5, fill=orange!60]      (e1e5) {0};
+    \node[cell, right of=e1e5, fill=orange!60]          (e1e4) {0};
+    \node[cell, right of=e1e4, fill=orange!60]          (e1e3) {0};
+    \node[cell, right of=e1e3, fill=orange!60]          (e1e2) {0};
+    \node[cell, right of=e1e2, fill=orange!60]          (e1e1) {0};
+    \node[cell, right of=e1e1, fill=orange!60]          (e1e0) {1};
+
+    \node[cell, below=0cm of e1e5]      (e2e5) {0};
+    \node[cell, right of=e2e5]          (e2e4) {1};
+    \node[cell, right of=e2e4]          (e2e3) {1};
+    \node[cell, right of=e2e3]          (e2e2) {0};
+    \node[cell, right of=e2e2]          (e2e1) {0};
+    \node[cell, right of=e2e1]          (e2e0) {1};
+
+    \node[cell, below=0cm of e2e5]      (e3e5) {0};
+    \node[cell, right of=e3e5]          (e3e4) {0};
+    \node[cell, right of=e3e4]          (e3e3) {0};
+    \node[cell, right of=e3e3]          (e3e2) {1};
+    \node[cell, right of=e3e2]          (e3e1) {0};
+    \node[cell, right of=e3e1]          (e3e0) {0};
+
+    \node[cell, below=0cm of e3e5]      (e4e5) {1};
+    \node[cell, right of=e4e5]          (e4e4) {0};
+    \node[cell, right of=e4e4]          (e4e3) {0};
+    \node[cell, right of=e4e3]          (e4e2) {1};
+    \node[cell, right of=e4e2]          (e4e1) {0};
+    \node[cell, right of=e4e1]          (e4e0) {1};
+
+    \node[cell, below=0cm of e4e5]      (e5e5) {0};
+    \node[cell, right of=e5e5]          (e5e4) {1};
+    \node[cell, right of=e5e4]          (e5e3) {0};
+    \node[cell, right of=e5e3]          (e5e2) {0};
+    \node[cell, right of=e5e2]          (e5e1) {0};
+    \node[cell, right of=e5e1]          (e5e0) {0};
+
+    % Collision vectors indices -> event
+    \node[above of=e0e5] (e_e5) {$e_5$};
+    \node[above of=e0e4] (e_e4) {$e_4$};
+    \node[above of=e0e3] (e_e3) {$e_3$};
+    \node[above of=e0e2] (e_e2) {$e_2$};
+    \node[above of=e0e1] (e_e1) {$e_1$};
+    \node[above of=e0e0] (e_e0) {$e_0$};
+
+    \node[right of=e0e0] (e_e0_2) {$e_0$};
+    \node[right of=e1e0] (e_e1_2) {$e_1$};
+    \node[right of=e2e0] (e_e2_2) {$e_2$};
+    \node[right of=e3e0] (e_e3_2) {$e_3$};
+    \node[right of=e4e0] (e_e4_2) {$e_4$};
+    \node[right of=e5e0] (e_e5_2) {$e_5$};
+
+    % Matrix title
+    \node[right=0cm of t_e5.west, xshift=-0.14cm, yshift=0.7cm] {
+        \textbf{Time Allocations}
+    };
+    \node[right=0cm of b_e5.west, xshift=-0.14cm, yshift=0.7cm] {
+        \textbf{Blocked Times}
+    };
+    \node[right=0cm of e_e5.west, xshift=-0.14cm, yshift=0.7cm] {
+        \textbf{Collision Vectors}
+    };
+
+
+    % Evaluate t2
+    \node[desc, below of=example_desc, yshift=-6.0cm] (eval_t2_desc) {
+        \textbf{Evaluate $t_2$}
+    };
+
+    % Collision vector
+    \node[cell, below=of eval_t2_desc.west, xshift=0.6cm, fill=orange!60] (cv5_1) {0};
+    \node[cell, right of=cv5_1, fill=orange!60] (cv4_1) {0};
+    \node[cell, right of=cv4_1, fill=orange!60] (cv3_1) {0};
+    \node[cell, right of=cv3_1, fill=orange!60] (cv2_1) {0};
+    \node[cell, right of=cv2_1, fill=orange!60] (cv1_1) {0};
+    \node[cell, right of=cv1_1, fill=orange!60] (cv0_1) {1};
+
+    % Times row
+    \node[cell, below of=cv5_1, fill=blue!50] (tr5) {0};
+    \node[cell, below of=cv4_1, fill=blue!50] (tr4) {0};
+    \node[cell, below of=cv3_1, fill=blue!50] (tr3) {0};
+    \node[cell, below of=cv2_1, fill=blue!50] (tr2) {0};
+    \node[cell, below of=cv1_1, fill=blue!50] (tr1) {0};
+    \node[cell, below of=cv0_1, fill=blue!50] (tr0) {0};
+
+    \draw[decorate, decoration={brace, amplitude=5pt}, thick]
+        ([xshift=0.5cm]cv0_1.north)
+        --
+        ([xshift=0.5cm]tr0.south)
+            node[midway, align=left, right=12pt] (bracket)
+        {
+            Collision vector and \textit{time allocation} do not have\\
+            common bits
+            $\Rightarrow e_1$ can be scheduled at $t_2$
+        };
+
+    % Collision vector
+    \node[cell, below=of tr5,   fill=orange!60] (cv5_2) {0};
+    \node[cell, right of=cv5_2, fill=orange!60] (cv4_2) {0};
+    \node[cell, right of=cv4_2, fill=orange!60] (cv3_2) {0};
+    \node[cell, right of=cv3_2, fill=orange!60] (cv2_2) {0};
+    \node[cell, right of=cv2_2, fill=orange!60] (cv1_2) {0};
+    \node[cell, right of=cv1_2, fill=orange!60] (cv0_2) {1};
+
+    % Blocked row
+    \node[cell, below of=cv5_2, fill=cyan!40] (br5) {0};
+    \node[cell, below of=cv4_2, fill=cyan!40] (br4) {0};
+    \node[cell, below of=cv3_2, fill=cyan!40] (br3) {0};
+    \node[cell, below of=cv2_2, fill=cyan!40] (br2) {0};
+    \node[cell, below of=cv1_2, fill=cyan!40] (br1) {0};
+    \node[cell, below of=cv0_2, fill=cyan!40] (br0) {0};
+
+    \draw[decorate, decoration={brace, amplitude=5pt}, thick]
+        ([xshift=0.5cm]cv0_2.north)
+        --
+        ([xshift=0.5cm]br0.south)
+            node[midway, align=left, right=12pt] (bracket)
+        {
+            Collision vector and \textit{blocked events} do not have\\
+            common bits
+            $\Rightarrow$ no enhanced efficiency
+        };
+
+
+    % Evaluate t1
+    \node[desc, below of=eval_t2_desc, yshift=-4cm] (eval_t1_desc) {
+        \textbf{Evaluate $t_1$}
+    };
+
+    % Collision vector
+    \node[cell, below=of eval_t1_desc.west, xshift=0.6cm, fill=orange!60] (cv5_3) {0};
+    \node[cell, right of=cv5_3, fill=orange!60] (cv4_3) {0};
+    \node[cell, right of=cv4_3, fill=orange!60] (cv3_3) {0};
+    \node[cell, right of=cv3_3, fill=orange!60] (cv2_3) {0};
+    \node[cell, right of=cv2_3, fill=orange!60] (cv1_3) {0};
+    \node[cell, right of=cv1_3, fill=orange!60] (cv0_3) {1};
+
+    % Times row
+    \node[cell, below of=cv5_3, fill=green!50] (tr5_1) {0};
+    \node[cell, below of=cv4_3, fill=green!50] (tr4_1) {0};
+    \node[cell, below of=cv3_3, fill=green!50] (tr3_1) {0};
+    \node[cell, below of=cv2_3, fill=green!50] (tr2_1) {1};
+    \node[cell, below of=cv1_3, fill=green!50] (tr1_1) {0};
+    \node[cell, below of=cv0_3, fill=green!50] (tr0_1) {0};
+
+    \draw[decorate, decoration={brace, amplitude=5pt}, thick]
+        ([xshift=0.5cm]cv0_3.north)
+        --
+        ([xshift=0.5cm]tr0_1.south)
+            node[midway, align=left, right=12pt] (bracket)
+        {
+            Collision vector and \textit{time allocation} do not have\\
+            common bits
+            $\Rightarrow e_1$ can be scheduled at $t_1$
+        };
+
+    % Collision vector
+    \node[cell, below=of tr5_1, fill=orange!60] (cv5_4) {0};
+    \node[cell, right of=cv5_4, fill=orange!60] (cv4_4) {0};
+    \node[cell, right of=cv4_4, fill=orange!60] (cv3_4) {0};
+    \node[cell, right of=cv3_4, fill=orange!60] (cv2_4) {0};
+    \node[cell, right of=cv2_4, fill=orange!60] (cv1_4) {0};
+    \node[cell, right of=cv1_4, fill=orange!60] (cv0_4) {\textbf{1}};
+
+    % Blocked row
+    \node[cell, below of=cv5_4, fill=lime!60] (br5_1) {0};
+    \node[cell, below of=cv4_4, fill=lime!60] (br4_1) {1};
+    \node[cell, below of=cv3_4, fill=lime!60] (br3_1) {1};
+    \node[cell, below of=cv2_4, fill=lime!60] (br2_1) {0};
+    \node[cell, below of=cv1_4, fill=lime!60] (br1_1) {0};
+    \node[cell, below of=cv0_4, fill=lime!60] (br0_1) {\textbf{1}};
+
+    \draw[decorate, decoration={brace, amplitude=5pt}, thick]
+        ([xshift=0.5cm]cv0_4.north)
+        --
+        ([xshift=0.5cm]br0_1.south)
+            node[midway, align=left, right=12pt] (bracket)
+        {
+            Collision vector and \textit{blocked events} do have\\
+            common bits
+            $\Rightarrow$ \textbf{enhanced} efficiency
+        };
+
+    % Result
+    \node[desc, draw, below of=eval_t1_desc, yshift=-6.2cm] {
+        \textbf{Result:} The event $e_1$ can be scheduled at both time
+        slots -- $t_2$ or $t_1$ -- as either allocation does not cause any
+        collisions with previously scheduled events.
+        But, $t_1$ offers a more efficient resource usage than $t_2$,
+        because $e_1$ shares a resource dependency with the previously
+        scheduled event $e_2$, which results in an efficient use of
+        resources.
+        In this case the heuristic would schedule $e_1$ at $t_1$ because of
+        the better efficiency score.
+    };
+
+\end{tikzpicture}

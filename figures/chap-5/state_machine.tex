@@ -1,0 +1,204 @@
+\begin{tikzpicture}
+    \tikzstyle{startstop} = [
+        rectangle, rounded corners, text centered, draw=black,
+        minimum width=2cm, minimum height=0.75cm
+    ]
+
+    \tikzstyle{outer} = [
+        rectangle, text centered, draw,
+        minimum width=7cm, minimum height=4.44cm,
+        % inner sep=0pt
+    ]
+    \tikzstyle{title} = [
+        rectangle, text centered, draw,
+        minimum width=7cm, minimum height=0.8cm
+    ]
+    \tikzstyle{param} = [
+        rectangle, text centered, %draw,
+        align=left,
+        minimum width=2.8cm, minimum height=0.7cm,
+        text width=2.5cm,
+        inner sep=0
+    ]
+    \tikzstyle{eq} = [
+        rectangle, text centered, %draw,
+        align=center,
+        minimum width=0.3cm, minimum height=0.7cm,
+        text width=0.27cm,
+        inner sep=0,
+        text height=1.4ex
+    ]
+    \tikzstyle{value} = [
+        rectangle, text centered, %draw,
+        align=left,
+        minimum width=3.8cm, minimum height=0.7cm,
+        text width=3.5cm,
+        inner sep=0
+    ]
+
+    \tikzstyle{decision} = [
+        diamond, text centered, draw=black,
+        minimum width=3cm, minimum height=1cm, aspect=2
+    ]
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    \node (start) [startstop] {Start};
+
+    \node (broad_outer) [outer, below=1cm of start] {};
+    \node (broad_title) [title, below=0 of broad_outer.north] {$Broad$};
+
+    \matrix
+        [column sep=0mm, row sep=0mm] at
+        ([yshift=-0.70cm, xshift=-0.11cm]broad_outer.north west)
+        [anchor=north west] {
+        \node[param] {selection};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{LinearRank(1.4)}}; \\
+
+        \node[param] {crossover};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{Trade(1)}}; \\
+
+        \node[param] {mutation};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{Trade}}; \\
+
+        \node[param] {mut. rate};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{0.015}}; \\
+
+        \node[param] {replacement};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{EliteAbsolute(1)}};\\
+    };
+
+    \node (focus_outer) [outer, below=1.5cm of broad_outer] {};
+    \node (focus_title) [title, below=0 of focus_outer.north] {$Focus$};
+
+    \matrix
+        [column sep=0mm, row sep=0mm] at
+        ([yshift=-0.70cm, xshift=-0.11cm]focus_outer.north west)
+        [anchor=north west] {
+        \node[param] {\textbf{selection}};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{LinearRank(1.6)}}; \\
+
+        \node[param] {crossover};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{Trade(1)}}; \\
+
+        \node[param] {mutation};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{Trade}}; \\
+
+        \node[param] {\textbf{mut. rate}};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{0.01}}; \\
+
+        \node[param] {replacement};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{EliteAbsolute(1)}};\\
+    };
+
+    \node (finish_outer) [outer, below=1.5cm of focus_outer] {};
+    \node (finish_title) [title, below=0 of finish_outer.north] {$Finish$};
+
+    \matrix
+        [column sep=0mm, row sep=0mm] at
+        ([yshift=-0.70cm, xshift=-0.11cm]finish_outer.north west)
+        [anchor=north west] {
+        \node[param] {\textbf{selection}};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{LinearRank(2.5)}}; \\
+
+        \node[param] {crossover};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{Trade(1)}}; \\
+
+        \node[param] {mutation};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{Trade}}; \\
+
+        \node[param] {\textbf{mut. rate}};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{0.0056}}; \\
+
+        \node[param] {replacement};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{EliteAbsolute(1)}}; \\
+    };
+
+    \node (broad2_outer) [outer, right=3cm of broad_outer] {};
+    \node (broad2_title) [title, below=0 of broad2_outer.north] {$Broad '$};
+    \matrix
+        [column sep=0mm, row sep=0mm] at
+        ([yshift=-0.70cm, xshift=-0.11cm]broad2_outer.north west)
+        [anchor=north west] {
+        \node[param] {\textbf{selection}};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{LinearRank(2.5)}}; \\
+
+        \node[param] {crossover};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{Trade(1)}}; \\
+
+        \node[param] {mutation};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{Trade}}; \\
+
+        \node[param] {\textbf{mut. rate}};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{0.0056}}; \\
+
+        \node[param] {\textbf{replacement}};
+            & \node[eq] {$=$};
+            & \node[value] {\texttt{Full}}; \\
+    };
+
+    \node (branch)
+        [decision, right=3cm of focus_outer.east]
+        {5th reset in a row?};
+
+
+    \draw[->, thick]
+        (start.south) -- (broad_outer.north);
+        % node[midway, right, yshift=0.04cm] {asdf};
+
+    \draw[->, thick]
+        (broad_outer.south) -- (focus_outer.north)
+        node[midway, right, yshift=0.04cm] {after 200 generations};
+
+    \draw[->, thick]
+        (focus_outer.south) -- (finish_outer.north)
+        node[midway, right, yshift=0.04cm] {after 1800 generations};
+
+    \draw[->, thick]
+        (finish_outer.east)
+        -- ++(5.41cm,0)
+        -- (branch.south)
+        node[midway, above, xshift=-2.75cm, yshift=-2.4cm]
+        {after 3000 generations};
+
+    \draw[->, thick]
+        (branch.west)
+        -- ++(-1.5cm,0)
+        -- ++(0,4.955cm)
+        -- ([yshift=-1.0cm]broad_outer.east)
+        node[midway, above, xshift=1.5cm, yshift=-4.9cm]
+        {no};
+
+    \draw[->, thick]
+        (branch.east)
+        -- ++(1.3cm,0)
+        -- ([xshift=2.62cm]broad2_outer.south)
+        node[midway, above, xshift=-0.7cm, yshift=-1.9cm]
+        {yes};
+
+    \draw[->, thick]
+        (broad2_outer.west) -- (broad_outer.east)
+        node[midway, above, align=center]
+        {after 50\\generations};
+
+
+\end{tikzpicture}
